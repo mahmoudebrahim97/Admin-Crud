@@ -29,7 +29,6 @@ class CategoryController extends Controller
     /***************************  store  **************************/
         public function store(Request $request)
     {
-        // dd($request);
         $category = Category::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -48,12 +47,10 @@ class CategoryController extends Controller
         if($category->category_id == null ){
         return redirect()->route('dashboard');
         }else{
-
             $id = $category->category_id;
         return redirect()->route('subcategories', compact('id'));
         }
     }
-
 
     /***************************  edit page  **************************/
     public function edit($id)
@@ -86,14 +83,6 @@ class CategoryController extends Controller
                 $id = $category->category_id;
             return redirect()->route('subcategories', compact('id'));
             }
-    }
-
-    /*************** show *************************************/
-    public function show($id)
-    {
-        $row = Category::findOrFail($id);
-        $categories = Category::get();
-        return view('admin.categories.show', ['row' => $row, 'categories' => $categories]);
     }
 
     /***************************  delete  **************************/

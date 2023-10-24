@@ -28,9 +28,6 @@ sub categories
                                             <a class="btn btn-primary mb-1" style="padding:1px" href="{{route('edit',$child->id)}}">Edit</a>
                                         @endcan
                                         @method('DELETE')
-                                        @can('product-list')
-                                        <a href="" class="btn btn-success mb-1" style="padding:1px">Models</a>
-                                        @endcan
                                         @can('product-delete')
                                             <button type="submit" class="btn btn-danger mb-1"
                                                 style="padding:1px">Delete</button>
