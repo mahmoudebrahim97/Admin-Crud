@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Trait\uploadImageTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store;
 use App\Traits\uploadImageTrait as TraitsUploadImageTrait;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
