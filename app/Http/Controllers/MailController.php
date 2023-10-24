@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailToUsers;
 use App\Mail\UserMail;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,15 +31,10 @@ class MailController extends Controller
         return view('users.all_users_mail', compact('users'));
     }
     public function send_mail_all_users(Request $request)
-    {
-        $users = User::where('role_name', '!=', '["admin"]')->get();
-        foreach($users as $user){
-            $details = [
-                'message' => $request->message,
-            ];
-            Mail::to($user)->send(new UserMail($details));
-        }
-        return redirect()->back()->with('sent successfully', 'The Mail Sent Successfully');
-    }
+{
+    $message = $request->message;
+    dispatch(new SendEmailToUsers($message));
+    return redirect()->back()->with('sent successfully', 'The Mail Sent Successfully');
+}
 
 }
