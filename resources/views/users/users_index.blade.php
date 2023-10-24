@@ -73,8 +73,8 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        @if (!empty($user->getRoleNames()))
-                                                            @foreach ($user->getRoleNames() as $v)
+                                                        @if (!empty($user->role_name))
+                                                            @foreach ($user->role_name as $v)
                                                                 <label class="badge bg-success">{{ $v }}</label>
                                                             @endforeach
                                                         @endif

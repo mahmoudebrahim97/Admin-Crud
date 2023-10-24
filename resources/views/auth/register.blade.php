@@ -18,6 +18,10 @@
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
+            <div class="mt-4">
+                <x-label for="country" value="{{ __('Country') }}" />
+                <x-input id="country" class="block mt-1 w-full" type="text" name="country" required autocomplete="country" />
+            </div>
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />

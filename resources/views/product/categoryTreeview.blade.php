@@ -26,7 +26,7 @@
                                 class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $category->name }}</h5>
-                                <p class="card-text">{{ $category->detail }}</p>
+                                <p class="card-text">{{ $category->description }}</p>
                                 <form action="{{ route('destroy', $category->id) }}" method="POST">
                                 <div class="row p-1">
                                         @method('DELETE')

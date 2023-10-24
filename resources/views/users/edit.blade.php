@@ -67,14 +67,9 @@
                                     <option value="blocked">blocked</option>
                                 </select>
                             </div>
-                            <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0">
-                                <div class="form-label">Country <span class="tx-danger">*</span></div>
-                                <select name="country" id="select-beast" class="form-control  nice-select">
-                                    <option value="egypt">Egypt</option>
-                                    <option value="saudi arabia">Saudi Arabia</option>
-                                    <option value="tunisia">Tunisia</option>
-                                    <option value="united states">United States</option>
-                                </select>
+                            <div class="col-5">
+                                <strong class="form-label">Country</strong>
+                                {!! Form::text('country', null, ['placeholder' => 'Your Country', 'class' => 'form-control']) !!}
                             </div>
                         </div>
 

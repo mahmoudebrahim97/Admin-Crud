@@ -66,12 +66,7 @@
             </div>
             <div class="col-5">
                 <strong class="form-label">Country</strong>
-                <select name="country" id="select-beast" class="form-control  nice-select">
-                    <option value="egypt">Egypt</option>
-                    <option value="saudi arabia">Saudi Arabia</option>
-                    <option value="tunisia">Tunisia</option>
-                    <option value="united states">United States</option>
-                </select>
+                {!! Form::text('country', null, ['placeholder' => 'Your Country', 'class' => 'form-control']) !!}
             </div>
         </div>
 

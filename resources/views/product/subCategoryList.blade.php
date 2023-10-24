@@ -20,7 +20,7 @@ sub categories
                                 class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $child->name }}</h5>
-                                <p class="card-text">{{ $child->detail }}</p>
+                                <p class="card-text">{{ $child->description }}</p>
                                 <form action="{{route('destroy',$child->id)}}" method="POST">
                                     <div class="row p-1">
                                         @csrf
