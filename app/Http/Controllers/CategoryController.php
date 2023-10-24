@@ -37,9 +37,10 @@ class CategoryController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            'img_path' => md5(uniqid(rand(), true))
         ]);
+
         $this->uploadImage($request, $category->id, $category);
+
         if ($category->category_id == null) {
             return redirect()->route('dashboard');
         } else {
@@ -63,9 +64,10 @@ class CategoryController extends Controller
         Category::where('id', $id)->update([
             'name' => $request->name,
             'description' => $request->description,
-            'img_path' => $category->img_path
         ]);
+
         $this->uploadImage($request, $id, $category);
+
         if ($category->category_id == null) {
             return redirect()->route('dashboard');
         } else {

@@ -22,7 +22,7 @@
                 <div class="col-4 ">
                     <a href="{{ route('subcategories', $category->id) }}" style="text-decoration: none ; color: black">
                         <div class="card" style="width: auto;">
-                            <img src="{{ $category->image ? asset('categories/' . $category->img_path . '/' . $category->image) : '' }}"
+                            <img src="{{ $category->image ? asset('categories/' . '/' . $category->image) : '' }}"
                                 class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $category->name }}</h5>

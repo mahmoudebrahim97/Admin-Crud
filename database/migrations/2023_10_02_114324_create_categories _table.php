@@ -13,7 +13,6 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('category_id')->nullable()->constrained()->references('id')->on('categories')->onDelete('set null');
             $table->string('name');
             $table->string('description');
-            $table->string('img_path');
             $table->string('image')->nullable();
             $table->enum('status',['true','false'])->default('true');
             $table->timestamps();
