@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Trait\uploadImageTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store;
+use App\Traits\uploadImageTrait as TraitsUploadImageTrait;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    use TraitsUploadImageTrait;
+
     /***************************  get all   **************************/
     public function index()
     {
@@ -27,7 +31,7 @@ class CategoryController extends Controller
         return view('product.create', compact('id'));
     }
     /***************************  store  **************************/
-        public function store(Request $request)
+    public function store(Request $request)
     {
         $category = Category::create([
             'name' => $request->name,
@@ -35,20 +39,12 @@ class CategoryController extends Controller
             'category_id' => $request->category_id,
             'img_path' => md5(uniqid(rand(), true))
         ]);
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $file_name = $file->getClientOriginalName();
-            DB::table('categories')->where('id', $category->id)->update([
-                'image' => $file_name,
-            ]);
-            $request->image->move(public_path('categories/' . $category->img_path), $file_name);
-        }
-
-        if($category->category_id == null ){
-        return redirect()->route('dashboard');
-        }else{
+        $this->uploadImage($request, $category->id, $category);
+        if ($category->category_id == null) {
+            return redirect()->route('dashboard');
+        } else {
             $id = $category->category_id;
-        return redirect()->route('subcategories', compact('id'));
+            return redirect()->route('subcategories', compact('id'));
         }
     }
 
@@ -63,26 +59,19 @@ class CategoryController extends Controller
     /***************************  update   **************************/
     public function update(store $request, $id)
     {
-        $category = Category::where('id',$id)->first();
-        Category::where('id',$id)->update([
+        $category = Category::where('id', $id)->first();
+        Category::where('id', $id)->update([
             'name' => $request->name,
             'description' => $request->description,
             'img_path' => $category->img_path
         ]);
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $file_name = $file->getClientOriginalName();
-            DB::table('categories')->where('id', $id)->update([
-                'image' => $file_name,
-            ]);
-            $request->image->move(public_path('categories/' . $category->img_path), $file_name);
-        }
-        if($category->category_id == null ){
+        $this->uploadImage($request, $id, $category);
+        if ($category->category_id == null) {
             return redirect()->route('dashboard');
-            }else{
-                $id = $category->category_id;
+        } else {
+            $id = $category->category_id;
             return redirect()->route('subcategories', compact('id'));
-            }
+        }
     }
 
     /***************************  delete  **************************/

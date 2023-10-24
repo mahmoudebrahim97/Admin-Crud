@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -31,18 +30,9 @@ class UserController extends Controller
         return view('users.create', compact('roles'));
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'role_name' => 'required',
-            'status' => 'required',
-            'country' => 'required'
-        ]);
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $user->assignRole($request->input('role_name'));
         return redirect()->route('users.index')
@@ -62,21 +52,15 @@ class UserController extends Controller
         $userRole = $user->roles->pluck('name', 'name')->all();
         return view('users.edit', compact('user', 'roles', 'userRole'));
     }
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'same:confirm-password',
-            'status' => 'required',
-            'country' => 'required'
-        ]);
-        DB::table('users')->where('id',$id)->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=> Hash::make($request->password) ,
-            'status'=>$request->status,
-            'country'=>$request->country,
+
+        User::where('id', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'status' => $request->status,
+            'country' => $request->country,
         ]);
         $user = User::find($id);
         if ($user->role_name != '["Admin"]') {
