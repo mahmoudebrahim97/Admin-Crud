@@ -52,16 +52,11 @@ class UserController extends Controller
         $userRole = $user->roles->pluck('name', 'name')->all();
         return view('users.edit', compact('user', 'roles', 'userRole'));
     }
+
     public function update(UserRequest $request, $id)
     {
-
-        User::where('id', $id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'status' => $request->status,
-            'country' => $request->country,
-        ]);
+        $validated = $request->validated();
+        User::where('id', $id)->update($validated);
         $user = User::find($id);
         if ($user->role_name != '["Admin"]') {
             $user->syncPermissions($request->input('permission'));
@@ -69,6 +64,7 @@ class UserController extends Controller
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully');
     }
+
     public function destroy($id)
     {
         User::find($id)->delete();
