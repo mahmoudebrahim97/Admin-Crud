@@ -17,7 +17,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->id,
-            'password' => 'same:confirm-password',
+            'password' => 'required',
             'status' => 'required',
             'country' => 'required'
         ];

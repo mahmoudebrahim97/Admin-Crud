@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -56,8 +57,13 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $validated = $request->validated();
-        User::where('id', $id)->update($validated);
         $user = User::find($id);
+        if ($request->has('password')) {
+            $validated['password'] = Hash::make($request->password);
+        } else {
+            unset($validated['password']);
+        }
+        User::where('id', $id)->update($validated);
         if ($user->role_name != '["Admin"]') {
             $user->syncPermissions($request->input('permission'));
         }

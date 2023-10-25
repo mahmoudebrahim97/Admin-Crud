@@ -47,14 +47,9 @@
                             </div>
                         </div>
                         <div class="row mg-b-20 mb-2">
-                            <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
+                            <div class="parsley-input col-md-12 mg-t-20 mg-md-t-0" id="lnWrapper">
                                 <label class="mb-2"> Password <span class="tx-danger">*</span></label>
                                 {!! Form::password('password', ['class' => 'form-control', 'required']) !!}
-                            </div>
-
-                            <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
-                                <label class="mb-2">Confirm Your Password <span class="tx-danger">*</span></label>
-                                {!! Form::password('confirm-password', ['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
 
@@ -62,12 +57,12 @@
                             <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0">
                                 <label class="form-label"> Status *</label>
                                 <select name="status" id="select-beast" class="form-control  nice-select  custom-select">
-                                    <option value="{{ $user->Status }}">{{ $user->Status }}</option>
+                                    <option value="{{ $user->status }}">{{ $user->status }}</option>
                                     <option value="active">active</option>
                                     <option value="blocked">blocked</option>
                                 </select>
                             </div>
-                            <div class="col-5">
+                            <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0">
                                 <strong class="form-label">Country</strong>
                                 {!! Form::text('country', null, ['placeholder' => 'Your Country', 'class' => 'form-control']) !!}
                             </div>

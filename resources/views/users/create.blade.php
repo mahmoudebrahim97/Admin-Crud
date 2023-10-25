@@ -39,19 +39,11 @@
             </div>
         </div>
         <div class="row d-flex justify-content-center mb-2">
-            <div class="col-5">
+            <div class="col-10">
                 <div class="form-group">
                     <strong> Password :</strong>
                     <br>
                     {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
-                </div>
-            </div>
-
-            <div class="col-5">
-                <div class="form-group">
-                    <strong> Confirm Your Passowrd :</strong>
-                    <br>
-                    {!! Form::password('confirm-password', ['placeholder' => 'Retype the password', 'class' => 'form-control']) !!}
                 </div>
             </div>
         </div>
